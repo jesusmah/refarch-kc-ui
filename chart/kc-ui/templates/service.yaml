@@ -10,10 +10,11 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  - name: http
+    port: {{ .Values.service.servicePort }}
+    nodePort: {{ .Values.service.nodePort }}
+  - name: https
+    port: {{ .Values.service.servicePortHttps }}
   selector:
     app: {{ template "kc-ui.name" . }}
     release: {{ .Release.Name }}

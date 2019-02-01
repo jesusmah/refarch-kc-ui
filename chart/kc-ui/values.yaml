@@ -5,13 +5,15 @@
 replicaCount: 1
 
 image:
-  repository: ibmcase/kc-ui
+  repository: edobrez/kc-ui
   tag: latest
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
-  port: 80
+  type: NodePort
+  servicePort: 9080
+  servicePortHttps: 9443
+  nodePort: 31400
 
 ingress:
   enabled: false
@@ -43,3 +45,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+eventstreams:
+  brokers: "kafka05-prod01.messagehub.services.eu-de.bluemix.net:9093"

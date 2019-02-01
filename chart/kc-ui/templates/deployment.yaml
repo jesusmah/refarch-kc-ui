@@ -37,6 +37,22 @@ spec:
               port: http
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          env:
+            - name: KAFKA_ENV
+              value: "IBMCLOUD"
+            - name: KAFKA_BROKERS
+              value: "{{ .Values.eventstreams.brokers }}"
+            - name: KAFKA_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: eventstreams-apikey
+                  key: binding
+            - name: FLEET_MS_URL
+              value: http://fleetms-service:9080/fleetms
+            - name: ORDER_MS_URL
+              value: http://ordercommandms-service:9080/orders
+            - name: ORDER_QUERY_MS_URL
+              value: http://orderqueryms-service:9080/orders
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
