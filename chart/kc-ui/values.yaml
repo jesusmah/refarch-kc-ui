@@ -5,13 +5,13 @@
 replicaCount: 1
 
 image:
-  repository: edobrez/kc-ui
+  repository: ibmcase/kc-ui
   tag: latest
   pullPolicy: IfNotPresent
 
 service:
   type: NodePort
-  servicePort: 9080
+  servicePort: 3010
   servicePortHttps: 9443
   nodePort: 31400
 
@@ -47,4 +47,4 @@ tolerations: []
 affinity: {}
 
 eventstreams:
-  brokers: "kafka05-prod01.messagehub.services.eu-de.bluemix.net:9093"
+  brokers: "<KAFKA_BROKERS>"
