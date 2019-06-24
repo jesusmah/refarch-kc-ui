@@ -540,11 +540,15 @@ chunk {vendor} vendor-es2015.js, vendor-es2015.js.map (vendor) 5.81 MB [initial]
 </pre></div></p>
 <p>All those commands are executed when developing the server or ui parts. But when we need to deploy the user interface with the other components of the solution we first need to build a docker image and then be sure the other services are deployed...</p>
 <h3 id="dockerize-all">Dockerize all</h3>
-<p>Build UI and server in one command: (this is what a CI/CD will do). </p>
+<p>Build UI and server in one command: (this is what a CI/CD pipeline will use). </p>
 <div class="codehilite"><pre><span></span>./scripts/buildDocker.sh
 </pre></div>
 
-<p>This will build a docker image, named: <code>ibmcase/kc-ui:latest</code> for local execution. </p>
+<p>This will build a docker image, named: <code>ibmcase/kc-ui:latest</code> for local execution using docker-compose.</p>
+<p>If you run on minikube locally use:</p>
+<div class="codehilite"><pre><span></span>./scripts/buildDocker.sh MINIKUBE
+</pre></div>
+
 <h2 id="run-locally">Run locally</h2>
 <p>To be able to run the UI and server locally, you need to have at least the following kafka, zookeeper, order command, order query and fleet simulator microservices up and running.</p>
 <p>As introduced before we have two options to run the solution, Minikube or docker-compose.</p>
@@ -565,11 +569,15 @@ docker-compose -f backbone-compose.yml up
 <p>Start the UI and BFF locally with <code>./script/run.sh</code> or with a docker <code>./script/runDocker.sh</code>. </p>
 </li>
 <li>
-<p>Use your web browser at http://localhost:3000/#/home </p>
+<p>Use your web browser at http://localhost:31010</p>
 </li>
 </ul>
 <h3 id="using-minikube">Using Minikube</h3>
 <p>See the instruction in <a href="https://ibm-cloud-architecture.github.io/refarch-kc/deployments/minikube/">this article</a> for deploying all the components.</p>
+<p>Use the <code>scripts\deployHelm MINIKUBE latest</code> command to use Helm to deploy the user interface release.</p>
+<ul>
+<li>Use your web browser at http://localhost:31010</li>
+</ul>
                 
                   
                 
